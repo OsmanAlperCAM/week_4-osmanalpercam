@@ -8,14 +8,22 @@ import DetailScreen from '../pages/Detail';
 
 const Stack = createNativeStackNavigator();
 
-const Navigaton = () => {
+const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name={routes.HOME_PAGE} component={HomeScreen} />
-        <Stack.Screen name={routes.DETAIL_PAGE} component={DetailScreen} />
+        <Stack.Screen
+          options={{headerTitle: 'Movies'}}
+          name={routes.HOME_PAGE}
+          component={HomeScreen}
+        />
+        <Stack.Screen
+          options={{headerTitle: 'Movie Detail'}}
+          name={routes.DETAIL_PAGE}
+          component={DetailScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
-export default Navigaton;
+export default Navigation;
