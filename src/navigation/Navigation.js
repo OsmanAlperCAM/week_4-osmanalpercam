@@ -5,15 +5,27 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import routes from './routes';
 import HomeScreen from '../pages/Home';
 import DetailScreen from '../pages/Detail';
+import colors from '../styles/colors';
 
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: colors.primaryDark,
+          },
+          headerTitleStyle: {
+            color: colors.primaryTextColor,
+          },
+          headerTintColor: colors.primaryTextColor,
+        }}>
         <Stack.Screen
-          options={{headerTitle: 'Movies'}}
+          options={{
+            headerTitle: 'Movies',
+          }}
           name={routes.HOME_PAGE}
           component={HomeScreen}
         />

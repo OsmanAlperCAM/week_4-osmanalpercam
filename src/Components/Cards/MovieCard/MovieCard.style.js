@@ -10,15 +10,15 @@ export default StyleSheet.create({
     margin: spacing.tiny,
     flexDirection: 'row',
     padding: spacing.tiny,
-    backgroundColor: '#ececec',
+    backgroundColor: colors.primary,
     borderRadius: radius.soft,
   },
-  
+
   image: {
     width: 75,
-    height:100,
-    resizeMode:'contain',
-    backgroundColor: colors.primary,
+    height: 100,
+    resizeMode: 'contain',
+    backgroundColor: colors.primaryLight,
     alignSelf: 'center',
   },
   body_container: {
@@ -26,13 +26,15 @@ export default StyleSheet.create({
     marginLeft: spacing.tiny,
     justifyContent: 'center',
   },
-  
+
   name: {
     fontWeight: 'bold',
     fontSize: fontSize.large,
+    color: colors.primaryTextColor,
   },
   brief: {
     fontSize: fontSize.normal,
+    color: colors.primaryTextColor,
   },
   rate: {
     fontWeight: 'bold',

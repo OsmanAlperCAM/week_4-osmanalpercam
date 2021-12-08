@@ -13,7 +13,8 @@ export default StyleSheet.create({
     
   },
   name: {
-    color: colors.primaryTextColor,
-    fontSize:fontSize.tiny
+    color: colors.secondaryTextColor,
+    fontSize:fontSize.tiny,
+    fontWeight:'bold',
   },
 });

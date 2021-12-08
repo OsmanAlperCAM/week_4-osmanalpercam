@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../styles/colors';
 
 export default StyleSheet.create({
     container:{
@@ -6,5 +7,6 @@ export default StyleSheet.create({
     },
     label:{
         fontWeight:'bold',
+        color:colors.primaryTextColor
     },
 });

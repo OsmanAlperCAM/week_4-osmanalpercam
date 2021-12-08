@@ -7,4 +7,5 @@ export default {
   secondaryLight: '#ffd64a',
   secondaryDark: '#c67600',
   secondaryTextColor: '#000000',
+  homeBackgroundColor: '#424242',
 };
