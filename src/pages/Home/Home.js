@@ -5,8 +5,10 @@ import routes from '../../navigation/routes';
 import useFetch from '../../hooks/useFetch/';
 import styles from './Home.style';
 import MovieCard from '../../Components/Cards/MovieCard';
+import GenreSelectButton from '../../Components/GenreSelectButton';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const Home = props => {
+const Home = () => {
   const [movieData, setMovieData] = useState([]);
   const {loading, error, data} = useFetch('movies');
   const {data: genresData} = useFetch('genres');
@@ -18,13 +20,25 @@ const Home = props => {
   const [genreSelectMenuVisible, setGenreSelectMenuVisible] = useState(false);
   const navigation = useNavigation();
 
+  navigation.setOptions({
+    headerRight: () => {
+      return (
+        <Icon
+          name="widgets"
+          size={30}
+          color={'#FFA500'}
+          onPress={onOpenGenresMenu}
+        />
+      );
+    },
+  });
+
   const onOpenGenresMenu = () => {
     setGenreSelectMenuVisible(true);
   };
   const onCloseGenresMenu = () => {
     setGenreSelectMenuVisible(false);
   };
-  const handleDetailPage = item => {};
 
   const genreFiltering = (data, genre) => {
     const filteringList = data.filter(item => {
@@ -48,23 +62,46 @@ const Home = props => {
       />
     );
   };
+
+  const getGenreFromGenreSelectButton = genre => {
+    if (genre === 'ALL MOVIES') {
+      setMovieData(data);
+      onCloseGenresMenu();
+      return;
+    }
+    genreFiltering(data, genre);
+    onCloseGenresMenu();
+  };
+
+  const genresMenuHeader = () => {
+    return (
+      <GenreSelectButton
+        genre={'ALL MOVIES'}
+        onSendGenre={getGenreFromGenreSelectButton}
+      />
+    );
+  };
   const renderGenres = ({item}) => {
     return (
-      <View>
-        <Text>{item.name}</Text>
-      </View>
+      <GenreSelectButton
+        genre={item.name}
+        onSendGenre={getGenreFromGenreSelectButton}
+      />
     );
   };
 
   return (
     <View style={styles.container}>
-      <Button title="Genre Select" onPress={onOpenGenresMenu} />
       <Modal
         animationType="slide"
         visible={genreSelectMenuVisible}
         onRequestClose={onCloseGenresMenu}>
         <View>
-          <FlatList data={genresData} renderItem={renderGenres} />
+          <FlatList
+            data={genresData}
+            renderItem={renderGenres}
+            ListHeaderComponent={genresMenuHeader}
+          />
         </View>
       </Modal>
       <FlatList data={movieData} renderItem={renderMovies} />
