@@ -1,9 +1,10 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, Button, Modal} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import routes from '../../navigation/routes';
 import useFetch from '../../hooks/useFetch/';
 import styles from './Home.style';
+import MovieCard from '../../Components/Cards/MovieCard';
 
 const Home = props => {
   const [movieData, setMovieData] = useState([]);
@@ -36,10 +37,13 @@ const Home = props => {
 
   const renderMovies = ({item}) => {
     return (
-      <View>
-        <Text>{item.name}</Text>
-        <Button title="Go DetailPage" onPress={() => handleDetailPage(item)} />
-      </View>
+      <MovieCard
+        id={item.id}
+        name={item.name}
+        brief={item.brief}
+        rate={item.rate}
+        genre={[...item.genre]}
+      />
     );
   };
   const renderGenres = ({item}) => {
