@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text, FlatList, Button} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, FlatList, Button, Modal} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import routes from '../../navigation/routes';
 import styles from './Home.style';
@@ -28,25 +28,87 @@ const data = [
     cast: ['Tempor Ex Esse', 'Incididunt Aliquip', 'Reprehenderit Deserunt'],
   },
 ];
+const genres = [
+  {
+    id: 'dba3ca16-55de-11ec-bf63-0242ac130002',
+    name: 'ACTION',
+  },
+  {
+    id: 'dba3cc64-55de-11ec-bf63-0242ac130002',
+    name: 'COMEDY',
+  },
+  {
+    id: 'dba3cd7c-55de-11ec-bf63-0242ac130002',
+    name: 'DRAMA',
+  },
+  {
+    id: 'dba3ce76-55de-11ec-bf63-0242ac130002',
+    name: 'FANTASY',
+  },
+  {
+    id: 'dba3cf70-55de-11ec-bf63-0242ac130002',
+    name: 'HORROR',
+  },
+  {
+    id: 'dba3d434-55de-11ec-bf63-0242ac130002',
+    name: 'ROMANCE',
+  },
+  {
+    id: 'dba3d628-55de-11ec-bf63-0242ac130002',
+    name: 'THRILLER',
+  },
+];
 
 const Home = props => {
+  const [movieData, setMovieData] = useState([]);
+  const [genreSelectMenuVisible, setGenreSelectMenuVisible] = useState(false);
   const navigation = useNavigation();
 
-  const handleDetailPage = (item) => {
-    navigation.navigate(routes.DETAIL_PAGE,{movie:item});
+  const onOpenGenresMenu = () => {
+    setGenreSelectMenuVisible(true);
   };
+  const onCloseGenresMenu = () => {
+    setGenreSelectMenuVisible(false);
+  };
+  const handleDetailPage = item => {
+    navigation.navigate(routes.DETAIL_PAGE, {movie: item});
+  };
+
+  const genreFiltering = (data, genre) => {
+    const filteringList = data.filter(item => {
+      return item.genre.indexOf(genre.toUpperCase()) > -1;
+    });
+    setMovieData(filteringList);
+  };
+
   const renderMovies = ({item}) => {
     return (
       <View>
         <Text>{item.name}</Text>
-        <Button title="Go DetailPage" onPress={()=> handleDetailPage(item)} />
+        <Button title="Go DetailPage" onPress={() => handleDetailPage(item)} />
       </View>
     );
   };
+  const renderGenres = ({item}) => {
+    return (
+      <View>
+        <Text>{item.name}</Text>
+      </View>
+    );
+  };
+
   return (
     <View style={styles.container}>
+      <Button title="Genre Select" onPress={onOpenGenresMenu} />
+      <Modal
+        animationType="slide"
+        visible={genreSelectMenuVisible}
+        onRequestClose={onCloseGenresMenu}>
+        <View>
+          <FlatList data={genres} renderItem={renderGenres} />
+        </View>
+      </Modal>
       <FlatList data={data} renderItem={renderMovies} />
-      
     </View>
   );
 };

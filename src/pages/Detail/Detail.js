@@ -36,18 +36,21 @@ const Detail = () => {
       </View>
     );
   };
-  const onCloseModal = () => {
+
+  const onCloseComment = () => {
     setModalVisible(false);
   };
+
   const onShowComment = () => {
     setModalVisible(true);
   };
+  
   return (
     <View style={styles.container}>
       <Modal
         animationType="slide"
         visible={modalVisible}
-        onRequestClose={onCloseModal}>
+        onRequestClose={onCloseComment}>
         <View>
           <FlatList data={data} renderItem={renderComment} />
           <Text>Input ve Gonder Butonu</Text>
