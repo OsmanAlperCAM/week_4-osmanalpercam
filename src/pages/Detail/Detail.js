@@ -7,6 +7,7 @@ import useFetch from '../../hooks/useFetch/';
 import DetailCard from '../../Components/Cards/DetailCard';
 import styles from './Detail.style';
 import CommentCard from '../../Components/Cards/CommentCard';
+import Input from '../../Components/Input';
 
 const Detail = () => {
   const {loading, error, data: initialCommentData} = useFetch('comments');
@@ -41,6 +42,14 @@ const Detail = () => {
   const onShowComment = () => {
     setCommentsVisible(true);
   };
+  const getTextFromInput = text => {
+    
+    setCommentsData([...commentsData, {
+      id: Math.random(),
+      movieId: movie.id,
+      comment: text
+    },]);
+  };
 
   return (
     <View style={styles.container}>
@@ -50,7 +59,7 @@ const Detail = () => {
         onRequestClose={onCloseComment}>
         <View style={styles.modal_container}>
           <FlatList data={commentsData} renderItem={renderComment} />
-          <Text>Input ve Gonder Butonu</Text>
+          <Input sendText={getTextFromInput} placeholder={'Add a Comment...'}/>
         </View>
       </Modal>
       <DetailCard
