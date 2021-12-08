@@ -5,6 +5,7 @@ import routes from '../../navigation/routes';
 import useFetch from '../../hooks/useFetch/';
 import styles from './Home.style';
 import MovieCard from '../../Components/Cards/MovieCard';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Home = props => {
   const [movieData, setMovieData] = useState([]);
