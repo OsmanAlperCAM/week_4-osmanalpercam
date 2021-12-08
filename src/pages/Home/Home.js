@@ -5,7 +5,6 @@ import routes from '../../navigation/routes';
 import useFetch from '../../hooks/useFetch/';
 import styles from './Home.style';
 import MovieCard from '../../Components/Cards/MovieCard';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Home = props => {
   const [movieData, setMovieData] = useState([]);
@@ -25,15 +24,16 @@ const Home = props => {
   const onCloseGenresMenu = () => {
     setGenreSelectMenuVisible(false);
   };
-  const handleDetailPage = item => {
-    navigation.navigate(routes.DETAIL_PAGE, {movie: item});
-  };
+  const handleDetailPage = item => {};
 
   const genreFiltering = (data, genre) => {
     const filteringList = data.filter(item => {
       return item.genre.indexOf(genre.toUpperCase()) > -1;
     });
     setMovieData(filteringList);
+  };
+  const onMovieCardPress = item => {
+    navigation.navigate(routes.DETAIL_PAGE, {movie: item});
   };
 
   const renderMovies = ({item}) => {
@@ -44,6 +44,7 @@ const Home = props => {
         brief={item.brief}
         rate={item.rate}
         genre={[...item.genre]}
+        onMovieCardPress={() => onMovieCardPress(item)}
       />
     );
   };

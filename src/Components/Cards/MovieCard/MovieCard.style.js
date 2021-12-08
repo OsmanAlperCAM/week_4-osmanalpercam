@@ -1,13 +1,15 @@
 import {StyleSheet} from 'react-native';
+import radius from '../../../styles/radius';
+import spacing from '../../../styles/spacing';
 
 export default StyleSheet.create({
   container: {
     alignItems: 'center',
-    margin: 5,
+    margin: spacing.tiny,
     flexDirection: 'row',
-    padding: 5,
+    padding: spacing.tiny,
     backgroundColor: '#ececec',
-    borderRadius: 10,
+    borderRadius: radius.soft,
   },
   
   image: {
@@ -19,14 +21,10 @@ export default StyleSheet.create({
   },
   body_container: {
     flex: 1,
-    marginLeft: 5,
+    marginLeft: spacing.tiny,
     justifyContent: 'center',
   },
-  trailing_container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 10,
-  },
+  
   name: {
     fontWeight: 'bold',
     fontSize: 18,
