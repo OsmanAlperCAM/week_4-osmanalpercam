@@ -1,4 +1,6 @@
 import {StyleSheet} from 'react-native';
+import colors from '../../../styles/colors';
+import fontSize from '../../../styles/fontSize';
 import radius from '../../../styles/radius';
 import spacing from '../../../styles/spacing';
 
@@ -16,7 +18,7 @@ export default StyleSheet.create({
     width: 75,
     height:100,
     resizeMode:'contain',
-    backgroundColor: '#c61908',
+    backgroundColor: colors.primary,
     alignSelf: 'center',
   },
   body_container: {
@@ -27,10 +29,10 @@ export default StyleSheet.create({
   
   name: {
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: fontSize.large,
   },
   brief: {
-    fontSize: 15,
+    fontSize: fontSize.normal,
   },
   rate: {
     fontWeight: 'bold',

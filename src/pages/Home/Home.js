@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, Button, Modal} from 'react-native';
+import {View, Text, FlatList, Modal} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import routes from '../../navigation/routes';
 import useFetch from '../../hooks/useFetch/';
@@ -7,6 +7,8 @@ import styles from './Home.style';
 import MovieCard from '../../Components/Cards/MovieCard';
 import GenreSelectButton from '../../Components/GenreSelectButton';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import iconSize from '../../styles/iconSize';
+import colors from '../../styles/colors';
 
 const Home = () => {
   const [movieData, setMovieData] = useState([]);
@@ -15,23 +17,22 @@ const Home = () => {
 
   useEffect(() => {
     setMovieData(data);
+    navigation.setOptions({
+      headerRight: () => {
+        return (
+          <Icon
+            name="widgets"
+            size={iconSize.normal}
+            color={colors.secondary}
+            onPress={onOpenGenresMenu}
+          />
+        );
+      },
+    });
   }, [data]);
 
   const [genreSelectMenuVisible, setGenreSelectMenuVisible] = useState(false);
   const navigation = useNavigation();
-
-  navigation.setOptions({
-    headerRight: () => {
-      return (
-        <Icon
-          name="widgets"
-          size={30}
-          color={'#FFA500'}
-          onPress={onOpenGenresMenu}
-        />
-      );
-    },
-  });
 
   const onOpenGenresMenu = () => {
     setGenreSelectMenuVisible(true);
