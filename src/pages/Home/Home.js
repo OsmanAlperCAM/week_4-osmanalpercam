@@ -97,7 +97,7 @@ const Home = () => {
         animationType="slide"
         visible={genreSelectMenuVisible}
         onRequestClose={onCloseGenresMenu}>
-        <View>
+        <View style={styles.modal_container}>
           <FlatList
             data={genresData}
             renderItem={renderGenres}

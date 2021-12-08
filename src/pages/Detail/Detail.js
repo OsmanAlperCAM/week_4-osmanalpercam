@@ -1,23 +1,37 @@
+import React, {useState, useEffect} from 'react';
 import {useRoute} from '@react-navigation/native';
-import React, {useState} from 'react';
-import {View, Text, Modal, Pressable, FlatList} from 'react-native';
+import {View, Text, Modal, FlatList} from 'react-native';
 import Button from '../../Components/Button';
+import useFetch from '../../hooks/useFetch/';
+
 import DetailCard from '../../Components/Cards/DetailCard';
 import styles from './Detail.style';
+import CommentCard from '../../Components/Cards/CommentCard';
 
 const Detail = () => {
+  const {loading, error, data: initialCommentData} = useFetch('comments');
+  const [commentsData, setCommentsData] = useState(null);
   const [commentsVisible, setCommentsVisible] = useState(false);
 
   const route = useRoute();
   const {movie} = route.params;
-  console.log(movie.name);
 
-  const renderComment = ({item}) => {
-    return (
-      <View>
-        <Text>{item.comment}</Text>
-      </View>
-    );
+  useEffect(() => {
+    if (initialCommentData != null) {
+      commentFiltering(initialCommentData, movie.id);
+    }
+  }, [initialCommentData]);
+
+  const renderComment = ({item, index}) => {
+    console.log(index);
+    return <CommentCard comment={item.comment} index={index} />;
+  };
+
+  const commentFiltering = (data, movieId) => {
+    const filteringList = data.filter(item => {
+      return item.movieId == movieId;
+    });
+    setCommentsData(filteringList);
   };
 
   const onCloseComment = () => {
@@ -34,8 +48,8 @@ const Detail = () => {
         animationType="slide"
         visible={commentsVisible}
         onRequestClose={onCloseComment}>
-        <View>
-          {/* <FlatList data={data} renderItem={renderComment} /> */}
+        <View style={styles.modal_container}>
+          <FlatList data={commentsData} renderItem={renderComment} />
           <Text>Input ve Gonder Butonu</Text>
         </View>
       </Modal>
