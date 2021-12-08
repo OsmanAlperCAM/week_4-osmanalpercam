@@ -1,6 +1,7 @@
 import {useRoute} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {View, Text, Modal, Pressable, FlatList} from 'react-native';
+import Button from '../../Components/Button';
 import DetailCard from '../../Components/Cards/DetailCard';
 import styles from './Detail.style';
 
@@ -47,9 +48,7 @@ const Detail = () => {
         brief={movie.brief}
         cast={movie.cast}
       />
-      <Pressable onPress={onShowComment}>
-        <Text>Show Comment</Text>
-      </Pressable>
+      <Button label="Show Comments" onButtonPress={onShowComment} />
     </View>
   );
 };
