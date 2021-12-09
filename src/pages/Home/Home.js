@@ -9,6 +9,7 @@ import GenreSelectButton from '../../Components/GenreSelectButton';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import iconSize from '../../styles/iconSize';
 import colors from '../../styles/colors';
+import ModalHeader from '../../Components/ModalHeader';
 
 const Home = () => {
   const [movieData, setMovieData] = useState([]);
@@ -98,6 +99,7 @@ const Home = () => {
         visible={genreSelectMenuVisible}
         onRequestClose={onCloseGenresMenu}>
         <View style={styles.modal_container}>
+          <ModalHeader onPress={onCloseGenresMenu}/>
           <FlatList
             data={genresData}
             renderItem={renderGenres}

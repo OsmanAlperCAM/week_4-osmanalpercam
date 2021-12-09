@@ -9,6 +9,7 @@ import styles from './Detail.style';
 import CommentCard from '../../Components/Cards/CommentCard';
 import Input from '../../Components/Input';
 import routes from '../../navigation/routes';
+import ModalHeader from '../../Components/ModalHeader';
 
 const Detail = () => {
   const route = useRoute();
@@ -84,6 +85,7 @@ const Detail = () => {
           visible={commentsVisible}
           onRequestClose={onCloseComment}>
           <View style={styles.modal_container}>
+            <ModalHeader onPress={onCloseComment} />
             <FlatList data={commentsData} renderItem={renderComment} />
             <Input
               sendText={getTextFromInput}
