@@ -10,6 +10,8 @@ import CommentCard from '../../Components/Cards/CommentCard';
 import Input from '../../Components/Input';
 import routes from '../../navigation/routes';
 import ModalHeader from '../../Components/ModalHeader';
+import Loading from '../../Components/Loading';
+import Error from '../../Components/Error';
 
 const Detail = () => {
   const route = useRoute();
@@ -76,6 +78,12 @@ const Detail = () => {
       />
     );
   };
+  if (loading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <Error />;
+  }
 
   return (
     <ScrollView ref={scrollRef}>

@@ -10,6 +10,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import iconSize from '../../styles/iconSize';
 import colors from '../../styles/colors';
 import ModalHeader from '../../Components/ModalHeader';
+import Loading from '../../Components/Loading';
+import Error from '../../Components/Error';
 
 const Home = () => {
   const [movieData, setMovieData] = useState([]);
@@ -91,6 +93,12 @@ const Home = () => {
       />
     );
   };
+  if (loading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <Error />;
+  }
 
   return (
     <View style={styles.container}>
@@ -99,7 +107,7 @@ const Home = () => {
         visible={genreSelectMenuVisible}
         onRequestClose={onCloseGenresMenu}>
         <View style={styles.modal_container}>
-          <ModalHeader onPress={onCloseGenresMenu}/>
+          <ModalHeader onPress={onCloseGenresMenu} />
           <FlatList
             data={genresData}
             renderItem={renderGenres}
@@ -107,6 +115,7 @@ const Home = () => {
           />
         </View>
       </Modal>
+
       <FlatList data={movieData} renderItem={renderMovies} />
     </View>
   );
