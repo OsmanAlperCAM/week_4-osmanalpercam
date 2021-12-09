@@ -48,7 +48,7 @@ const Home = () => {
     setMovieData(filteringList);
   };
   const onMovieCardPress = item => {
-    navigation.navigate(routes.DETAIL_PAGE, {movie: item});
+    navigation.navigate(routes.DETAIL_PAGE, {movie: item,data});
   };
 
   const renderMovies = ({item}) => {

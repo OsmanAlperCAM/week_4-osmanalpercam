@@ -14,11 +14,10 @@ const MovieCard = ({id, name, brief, genre, rate, onMovieCardPress}) => {
     <TouchableWithoutFeedback onPress={onMovieCardPress}>
       <View style={styles.container}>
         <Image style={styles.image} />
-
         <View style={styles.body_container}>
           <Text style={styles.name}>{name}</Text>
-          <Text style={styles.brief}>
-            {brief.length > 60 ? brief.substring(0, 60) + '...' : brief}
+          <Text numberOfLines={2} ellipsizeMode="tail" style={styles.brief}>
+            {brief}
           </Text>
           <View style={styles.genre}>
             {genre.map((item, index) => {

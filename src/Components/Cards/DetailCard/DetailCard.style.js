@@ -8,6 +8,7 @@ export default StyleSheet.create({
   container: {
     backgroundColor: colors.primary,
     padding: spacing.tiny,
+    margin: spacing.tiny,
   },
   title_container: {
     flexDirection: 'row',

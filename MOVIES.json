@@ -239,10 +239,8 @@
             "id": "b973ba18-5553-11ec-bf63-0242ac130002",
             "name": "Exercitation Aliquip.",
             "rate": 9.9,
-            "genre": "QUI",
-            "director": [
-                "FANTASY"
-            ],
+            "genre": ["COMEDY"],
+            "director":"Laborum Est",
             "brief": "Adipisicing veniam id ipsum enim anim laborum est. Ipsum ad dolor eiusmod aute deserunt non labore tempor qui. Dolore cupidatat ex incididunt magna.",
             "cast": [
                 "Consequat Aute",
