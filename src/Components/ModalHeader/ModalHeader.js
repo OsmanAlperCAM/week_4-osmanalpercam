@@ -8,7 +8,7 @@ import colors from '../../styles/colors';
 const ModalHeader = ({onPress}) => {
   return (
     <View style={styles.container}>
-      <Icon name="close" size={iconSize.large} color={colors.primaryTextColor} onPress={onPress} />
+      <Icon name="arrow-left" size={iconSize.normal} color={colors.primaryTextColor} onPress={onPress} />
     </View>
   );
 };

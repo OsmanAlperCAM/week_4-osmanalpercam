@@ -7,6 +7,5 @@ export default StyleSheet.create({
         flexDirection: 'row',
         padding: spacing.tiny,
         backgroundColor: colors.primary,
-        justifyContent: 'flex-end'
     }
 });
