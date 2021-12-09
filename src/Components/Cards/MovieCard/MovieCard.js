@@ -7,7 +7,7 @@ import styles from './MovieCard.style';
 
 const MovieCard = ({id, name, brief, genre, rate, onMovieCardPress}) => {
   const renderGenre = (item, index) => {
-    return <GenreBadge key={`${item}+${id}+${index}`} genre={item} id={id} />;
+    return <GenreBadge key={Math.random()} genre={item} id={id} />;
   };
 
   return (
