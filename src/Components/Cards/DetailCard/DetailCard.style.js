@@ -18,10 +18,10 @@ export default StyleSheet.create({
   },
   row_container: {
     flexDirection: 'row',
-    flexWrap:'wrap',
+    flexWrap: 'wrap',
   },
   image: {
-    width: deviceSize.width - spacing.tiny * 2,
+    width: deviceSize.width - spacing.tiny * 4,
     height: deviceSize.height / 4,
     backgroundColor: colors.primaryLight,
     resizeMode: 'contain',
@@ -36,9 +36,9 @@ export default StyleSheet.create({
     fontSize: fontSize.normal,
     margin: spacing.tiny,
   },
-  
-  sub_title:{
+
+  sub_title: {
     color: colors.primaryTextColor,
-    fontWeight:'bold',
-  }
+    fontWeight: 'bold',
+  },
 });

@@ -1,19 +1,33 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, Image, Pressable} from 'react-native';
 import GenreBadge from '../../Badges/GenreBadge';
 import RateIcon from '../../RateIcon';
 import styles from './SimilarContentCard.style';
 
-const SimilarContentCard = ({name, rate, genre,index,id}) => {
+const SimilarContentCard = ({movie, onPress}) => {
+  const renderGenre = item => {
+    return <GenreBadge key={Math.random()} genre={item} />;
+  };
+
+  const onPressCard = () => {
+    onPress(movie);
+  };
+
   return (
-    <View key={`${name}-${id}+${index} `} style={styles.container}>
-      <Image style={styles.image} />
-      <View style={styles.text_container}>
-        <Text numberOfLines={1} ellipsizeMode='tail' style={styles.text}>{name}</Text>
+    <Pressable onPress={onPressCard}>
+      <View key={Math.random()} style={styles.container}>
+        <Image style={styles.image} />
+        <View style={styles.text_container}>
+          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.text}>
+            {movie.name}
+          </Text>
+        </View>
+        <View style={styles.genre_container}>
+          {movie.genre.map(item => renderGenre(item))}
+        </View>
+        <RateIcon rate={movie.rate} />
       </View>
-      <Text style={styles.genre}>{genre}</Text>
-      <RateIcon rate={rate} />
-    </View>
+    </Pressable>
   );
 };
 export default SimilarContentCard;

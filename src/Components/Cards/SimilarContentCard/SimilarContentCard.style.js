@@ -11,10 +11,10 @@ export default StyleSheet.create({
     backgroundColor: colors.primary,
     justifyContent: 'center',
     alignItems: 'center',
-    width: deviceSize.width/2
+    width: deviceSize.width / 2,
   },
   image: {
-    width: deviceSize.width/2,
+    width: deviceSize.width / 2,
     height: 100,
     backgroundColor: colors.primaryLight,
   },
@@ -27,9 +27,7 @@ export default StyleSheet.create({
     color: colors.primaryTextColor,
     fontSize: fontSize.large,
   },
-  genre: {
-    color: colors.primaryTextColor,
-    fontSize: fontSize.normal,
-
-  }
+  genre_container: {
+    flexDirection: 'row',
+  },
 });

@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
-import {useRoute} from '@react-navigation/native';
-import {View, Text, Modal, FlatList, ScrollView} from 'react-native';
+import React, {useState, useEffect, useRef} from 'react';
+import {useRoute, useNavigation} from '@react-navigation/native';
+import {View, Modal, FlatList, ScrollView} from 'react-native';
 import Button from '../../Components/Button';
 import useFetch from '../../hooks/useFetch/';
 import SimilarContentCard from '../../Components/Cards/SimilarContentCard';
@@ -8,10 +8,14 @@ import DetailCard from '../../Components/Cards/DetailCard';
 import styles from './Detail.style';
 import CommentCard from '../../Components/Cards/CommentCard';
 import Input from '../../Components/Input';
+import routes from '../../navigation/routes';
 
 const Detail = () => {
   const route = useRoute();
   const {movie} = route.params;
+  const navigation = useNavigation();
+
+  const scrollRef = useRef();
 
   const [commentsData, setCommentsData] = useState(null);
   const [commentsVisible, setCommentsVisible] = useState(false);
@@ -23,7 +27,7 @@ const Detail = () => {
   } = useFetch(`comments?movieId=${movie.id}`);
 
   const {data: filteredSimilarContent} = useFetch(
-    `movies?genre=${movie.genre.join('&genre=')}`,
+    `movies?genre_like=${movie.genre.join('&genre_like=')}`,
   );
 
   useEffect(() => {
@@ -58,21 +62,22 @@ const Detail = () => {
       },
     ]);
   };
-  const renderSimilarContentCard = (item, index) => {
+  const onSimilarContentCardPress = movie => {
+    navigation.navigate(routes.DETAIL_PAGE, {movie});
+    scrollRef.current?.scrollTo({x: 0, y: 0, animated: true});
+  };
+  const renderSimilarContentCard = item => {
     return (
       <SimilarContentCard
-      key={Math.random()}
-        name={item.name}
-        rate={item.rate}
-        genre={item.genre}
-        index={index}
-        id={item.id}
+        key={Math.random()}
+        movie={item}
+        onPress={onSimilarContentCardPress}
       />
     );
   };
 
   return (
-    <ScrollView>
+    <ScrollView ref={scrollRef}>
       <View style={styles.container}>
         <Modal
           animationType="slide"
@@ -97,7 +102,7 @@ const Detail = () => {
         />
         <Button label="Show Comments" onButtonPress={onShowComment} />
         <ScrollView horizontal>
-          {similarContentData.map((item, index) => {
+          {similarContentData.slice(-4).map((item, index) => {
             return renderSimilarContentCard(item, index);
           })}
         </ScrollView>
