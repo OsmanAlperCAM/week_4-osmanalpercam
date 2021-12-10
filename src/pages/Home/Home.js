@@ -6,8 +6,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import iconSize from '../../styles/iconSize';
 import colors from '../../styles/colors';
 import Loading from '../../Components/Loading';
-import Error from '../../Components/Error';
 import Layout from './Layout';
+import CenterText from '../../Components/CenterText';
 
 const Home = () => {
   const navigation = useNavigation();
@@ -68,7 +68,7 @@ const Home = () => {
     return <Loading />;
   }
   if (error || genresError) {
-    return <Error />;
+    return <CenterText text={'Oops!!!\nSomething went wrong'} />;
   }
 
   return (

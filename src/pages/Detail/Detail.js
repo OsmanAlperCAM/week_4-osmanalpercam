@@ -1,17 +1,9 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {useRoute, useNavigation} from '@react-navigation/native';
-import {View, Modal, FlatList, ScrollView} from 'react-native';
-import Button from '../../Components/Button';
 import useFetch from '../../hooks/useFetch/';
-import SimilarContentCard from '../../Components/Cards/SimilarContentCard';
-import DetailCard from '../../Components/Cards/DetailCard';
-import styles from './Detail.style';
-import CommentCard from '../../Components/Cards/CommentCard';
-import Input from '../../Components/Input';
 import routes from '../../navigation/routes';
-import ModalHeader from '../../Components/ModalHeader';
 import Loading from '../../Components/Loading';
-import Error from '../../Components/Error';
+import CenterText from '../../Components/CenterText';
 import Layout from './Layout/';
 
 const Detail = () => {
@@ -66,7 +58,7 @@ const Detail = () => {
     return <Loading />;
   }
   if (error) {
-    return <Error />;
+    return <CenterText text="Oops!!!{'\n'}Something went wrong" />;
   }
 
   return (

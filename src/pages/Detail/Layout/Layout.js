@@ -7,6 +7,7 @@ import styles from './Layout.style';
 import CommentCard from '../../../Components/Cards/CommentCard';
 import Input from '../../../Components/Input';
 import ModalHeader from '../../../Components/ModalHeader';
+import CenterText from '../../../Components/CenterText';
 
 const Layout = ({
   onSimilarContentCardPress,
@@ -40,7 +41,15 @@ const Layout = ({
           onRequestClose={onCloseComment}>
           <View style={styles.modal_container}>
             <ModalHeader onPress={onCloseComment} />
-            <FlatList data={commentsData} renderItem={renderComment} />
+            {commentsData.length <= 0 ? (
+              <CenterText
+                text={
+                  'No comments were found for this movie\nBe the first to comment'
+                }
+              />
+            ) : (
+              <FlatList data={commentsData} renderItem={renderComment} />
+            )}
             <Input
               sendText={getTextFromInput}
               placeholder={'Add a Comment...'}

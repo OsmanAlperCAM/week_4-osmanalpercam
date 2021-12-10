@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import styles from './Error.style';
+import styles from './CenterText.style';
 
-const Error = props => {
+const Error = ({text}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Oops!!!{'\n'}Something went wrong</Text>
+      <Text style={styles.text}>{text}</Text>
     </View>
   );
 };
