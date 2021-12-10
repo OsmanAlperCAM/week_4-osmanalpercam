@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, Text, Image} from 'react-native';
-import GenreBadge from '../../Badges/GenreBadge';
+import Badge from '../../Badge';
 import RateIcon from '../../RateIcon';
 import styles from './DetailCard.style';
 
 const DetailCard = ({id, name, rate, genre, director, brief, cast}) => {
   const renderGenre = (item, index) => {
-    return <GenreBadge key={`${item}+${id}+${index}`} genre={item} id={id} />;
+    return <Badge key={`${item}+${id}+${index}`} genre={item} id={id} />;
   };
   return (
     <View style={styles.container}>
@@ -24,7 +24,7 @@ const DetailCard = ({id, name, rate, genre, director, brief, cast}) => {
       <Text style={styles.brief}>{brief}</Text>
       <View style={styles.row_container}>
         <Text style={styles.brief}>Director: </Text>
-        <GenreBadge genre={director} />
+        <Badge genre={director} />
       </View>
       <View style={styles.row_container}>
         <Text style={styles.brief}>Cast:</Text>

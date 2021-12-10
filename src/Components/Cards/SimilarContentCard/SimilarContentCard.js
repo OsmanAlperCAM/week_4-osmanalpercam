@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, Text, Image, Pressable} from 'react-native';
-import GenreBadge from '../../Badges/GenreBadge';
+import Badge from '../../Badge';
 import RateIcon from '../../RateIcon';
 import styles from './SimilarContentCard.style';
 
 const SimilarContentCard = ({movie, onPress}) => {
   const renderGenre = item => {
-    return <GenreBadge key={Math.random()} genre={item} />;
+    return <Badge key={Math.random()} genre={item} />;
   };
 
   const onPressCard = () => {
