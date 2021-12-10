@@ -1,11 +1,13 @@
 import React from 'react';
-import {View, Text, Pressable, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import styles from './GenreSelectButton.style';
 
-const GenreSelectButton = ({genre,onSendGenre}) => {
-
+const GenreSelectButton = ({genre, onSendGenre}) => {
+  const onPress = ()=> {
+    onSendGenre(genre);
+  }
   return (
-    <TouchableOpacity onPress={()=> onSendGenre(genre)}>
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
         <Text style={styles.label}>{genre}</Text>
       </View>

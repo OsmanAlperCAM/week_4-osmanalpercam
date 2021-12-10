@@ -43,7 +43,6 @@ const Detail = () => {
   }, [initialCommentData, filteredSimilarContent]);
 
   const renderComment = ({item, index}) => {
-    console.log(index);
     return <CommentCard comment={item.comment} index={index} />;
   };
 
@@ -53,7 +52,6 @@ const Detail = () => {
 
   const onShowComment = () => {
     setCommentsVisible(true);
-    console.log(similarContentData);
   };
   const getTextFromInput = text => {
     setCommentsData([

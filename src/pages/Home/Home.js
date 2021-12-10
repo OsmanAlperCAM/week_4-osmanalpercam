@@ -1,22 +1,24 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, Modal} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import routes from '../../navigation/routes';
 import useFetch from '../../hooks/useFetch/';
-import styles from './Home.style';
-import MovieCard from '../../Components/Cards/MovieCard';
-import GenreSelectButton from '../../Components/GenreSelectButton';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import iconSize from '../../styles/iconSize';
 import colors from '../../styles/colors';
-import ModalHeader from '../../Components/ModalHeader';
 import Loading from '../../Components/Loading';
 import Error from '../../Components/Error';
+import Layout from './Layout';
 
 const Home = () => {
+  const navigation = useNavigation();
   const [movieData, setMovieData] = useState([]);
   const {loading, error, data} = useFetch('movies');
-  const {data: genresData} = useFetch('genres');
+  const {
+    loading: genresLoading,
+    error: genresError,
+    data: genresData,
+  } = useFetch('genres');
+  const [genreSelectMenuVisible, setGenreSelectMenuVisible] = useState(false);
 
   useEffect(() => {
     setMovieData(data);
@@ -34,9 +36,6 @@ const Home = () => {
     });
   }, [data]);
 
-  const [genreSelectMenuVisible, setGenreSelectMenuVisible] = useState(false);
-  const navigation = useNavigation();
-
   const onOpenGenresMenu = () => {
     setGenreSelectMenuVisible(true);
   };
@@ -50,25 +49,13 @@ const Home = () => {
     });
     setMovieData(filteringList);
   };
+
   const onMovieCardPress = item => {
     navigation.navigate(routes.DETAIL_PAGE, {movie: item});
   };
 
-  const renderMovies = ({item}) => {
-    return (
-      <MovieCard
-        id={item.id}
-        name={item.name}
-        brief={item.brief}
-        rate={item.rate}
-        genre={[...item.genre]}
-        onMovieCardPress={() => onMovieCardPress(item)}
-      />
-    );
-  };
-
   const getGenreFromGenreSelectButton = genre => {
-    if (genre === 'ALL MOVIES') {
+    if (genre === 'ALL Genres') {
       setMovieData(data);
       onCloseGenresMenu();
       return;
@@ -77,47 +64,23 @@ const Home = () => {
     onCloseGenresMenu();
   };
 
-  const genresMenuHeader = () => {
-    return (
-      <GenreSelectButton
-        genre={'ALL MOVIES'}
-        onSendGenre={getGenreFromGenreSelectButton}
-      />
-    );
-  };
-  const renderGenres = ({item}) => {
-    return (
-      <GenreSelectButton
-        genre={item.name}
-        onSendGenre={getGenreFromGenreSelectButton}
-      />
-    );
-  };
-  if (loading) {
+  if (loading || genresLoading) {
     return <Loading />;
   }
-  if (error) {
+  if (error || genresError) {
     return <Error />;
   }
 
   return (
-    <View style={styles.container}>
-      <Modal
-        animationType="slide"
-        visible={genreSelectMenuVisible}
-        onRequestClose={onCloseGenresMenu}>
-        <View style={styles.modal_container}>
-          <ModalHeader onPress={onCloseGenresMenu} />
-          <FlatList
-            data={genresData}
-            renderItem={renderGenres}
-            ListHeaderComponent={genresMenuHeader}
-          />
-        </View>
-      </Modal>
-
-      <FlatList data={movieData} renderItem={renderMovies} />
-    </View>
+    <Layout
+      movieData={movieData}
+      genresData={genresData}
+      selectedGenre={getGenreFromGenreSelectButton}
+      genreSelectMenuVisible={genreSelectMenuVisible}
+      onMovieCardPress={onMovieCardPress}
+      onCloseGenresMenu={onCloseGenresMenu}
+      onOpenGenresMenu={onOpenGenresMenu}
+    />
   );
 };
 export default Home;

@@ -6,6 +6,6 @@ export default StyleSheet.create({
     container:{
         flexDirection: 'row',
         padding: spacing.tiny,
-        backgroundColor: colors.primary,
+        backgroundColor: colors.primaryDark,
     }
 });
