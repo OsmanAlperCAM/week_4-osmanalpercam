@@ -12,13 +12,12 @@ import routes from '../../navigation/routes';
 import ModalHeader from '../../Components/ModalHeader';
 import Loading from '../../Components/Loading';
 import Error from '../../Components/Error';
+import Layout from './Layout/';
 
 const Detail = () => {
   const route = useRoute();
   const {movie} = route.params;
   const navigation = useNavigation();
-
-  const scrollRef = useRef();
 
   const [commentsData, setCommentsData] = useState(null);
   const [commentsVisible, setCommentsVisible] = useState(false);
@@ -42,10 +41,6 @@ const Detail = () => {
     }
   }, [initialCommentData, filteredSimilarContent]);
 
-  const renderComment = ({item, index}) => {
-    return <CommentCard comment={item.comment} index={index} />;
-  };
-
   const onCloseComment = () => {
     setCommentsVisible(false);
   };
@@ -64,18 +59,9 @@ const Detail = () => {
     ]);
   };
   const onSimilarContentCardPress = movie => {
-    navigation.navigate(routes.DETAIL_PAGE, {movie});
-    scrollRef.current?.scrollTo({x: 0, y: 0, animated: true});
+    navigation.push(routes.DETAIL_PAGE, {movie});
   };
-  const renderSimilarContentCard = item => {
-    return (
-      <SimilarContentCard
-        key={Math.random()}
-        movie={item}
-        onPress={onSimilarContentCardPress}
-      />
-    );
-  };
+
   if (loading) {
     return <Loading />;
   }
@@ -84,38 +70,16 @@ const Detail = () => {
   }
 
   return (
-    <ScrollView ref={scrollRef}>
-      <View style={styles.container}>
-        <Modal
-          animationType="slide"
-          visible={commentsVisible}
-          onRequestClose={onCloseComment}>
-          <View style={styles.modal_container}>
-            <ModalHeader onPress={onCloseComment} />
-            <FlatList data={commentsData} renderItem={renderComment} />
-            <Input
-              sendText={getTextFromInput}
-              placeholder={'Add a Comment...'}
-            />
-          </View>
-        </Modal>
-        <DetailCard
-          id={movie.id}
-          name={movie.name}
-          rate={movie.rate}
-          genre={movie.genre}
-          director={movie.director}
-          brief={movie.brief}
-          cast={movie.cast}
-        />
-        <Button label="Show Comments" onButtonPress={onShowComment} />
-        <ScrollView horizontal>
-          {similarContentData.slice(-4).map((item, index) => {
-            return renderSimilarContentCard(item, index);
-          })}
-        </ScrollView>
-      </View>
-    </ScrollView>
+    <Layout
+      onSimilarContentCardPress={onSimilarContentCardPress}
+      commentsVisible={commentsVisible}
+      onCloseComment={onCloseComment}
+      commentsData={commentsData}
+      getTextFromInput={getTextFromInput}
+      movie={movie}
+      onShowComment={onShowComment}
+      similarContentData={similarContentData}
+    />
   );
 };
 export default Detail;
