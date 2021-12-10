@@ -9,7 +9,7 @@ const Input = ({sendText, ...props}) => {
   const [text, setText] = useState('');
 
   const inputRef = useRef();
-  
+
   const onSendPress = () => {
     sendText(text);
     inputRef.current.clear();

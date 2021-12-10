@@ -1,5 +1,4 @@
 export default {
-    HOME_PAGE: 'HomePage',
-    DETAIL_PAGE: 'DetailPage',
-  };
-  
+  HOME_PAGE: 'HomePage',
+  DETAIL_PAGE: 'DetailPage',
+};

@@ -1,5 +1,5 @@
 import React from 'react';
-import Navigation from './navigation'
+import Navigation from './navigation';
 
 /**
  * Selamlar. Sizlerden istenen IMDB benzeri bir film analiz uygulaması geliştirmenizdir.
@@ -20,5 +20,5 @@ import Navigation from './navigation'
  * */
 
 export default function App() {
-  return <Navigation/>;
+  return <Navigation />;
 }

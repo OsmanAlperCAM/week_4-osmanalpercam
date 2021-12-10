@@ -7,7 +7,7 @@ export default StyleSheet.create({
     backgroundColor: colors.homeBackgroundColor,
   },
   modal_container: {
-      flex:1,
-      backgroundColor: colors.homeBackgroundColor
+    flex: 1,
+    backgroundColor: colors.homeBackgroundColor,
   },
 });

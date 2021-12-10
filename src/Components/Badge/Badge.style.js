@@ -10,11 +10,10 @@ export default StyleSheet.create({
     padding: spacing.tiny,
     margin: spacing.tiny,
     borderRadius: radius.soft,
-    
   },
   name: {
     color: colors.secondaryTextColor,
-    fontSize:fontSize.tiny,
-    fontWeight:'bold',
+    fontSize: fontSize.tiny,
+    fontWeight: 'bold',
   },
 });

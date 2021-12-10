@@ -21,6 +21,5 @@ export default StyleSheet.create({
     borderColor: colors.primaryTextColor,
     padding: 0,
     color: colors.primaryTextColor,
-    
   },
 });

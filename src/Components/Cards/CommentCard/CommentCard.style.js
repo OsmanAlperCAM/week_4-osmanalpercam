@@ -10,16 +10,16 @@ export default StyleSheet.create({
     padding: spacing.tiny,
     margin: spacing.tiny,
     backgroundColor: colors.secondary,
-},
-comment_container: {
+  },
+  comment_container: {
     flex: 1,
     marginLeft: spacing.tiny,
     padding: spacing.tiny,
     borderRadius: radius.smooth,
     backgroundColor: colors.secondaryLight,
   },
-  comment:{
-    fontSize:fontSize.small,
-    color: colors.secondaryTextColor
+  comment: {
+    fontSize: fontSize.small,
+    color: colors.secondaryTextColor,
   },
 });
