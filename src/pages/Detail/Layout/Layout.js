@@ -41,7 +41,7 @@ const Layout = ({
           visible={commentsVisible}
           onRequestClose={onCloseComment}>
           <View style={styles.modal_container}>
-            <ModalHeader onPress={onCloseComment} />
+            <ModalHeader onPress={onCloseComment} text="Comments" />
             {commentsData.length <= 0 ? (
               <CenterText
                 text={

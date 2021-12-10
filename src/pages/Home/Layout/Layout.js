@@ -42,7 +42,7 @@ const Layout = ({
         visible={genreSelectMenuVisible}
         onRequestClose={onCloseGenresMenu}>
         <View style={styles.modal_container}>
-          <ModalHeader onPress={onCloseGenresMenu} />
+          <ModalHeader onPress={onCloseGenresMenu} text="Genres" />
           <FlatList
             data={genresData}
             renderItem={renderGenres}
