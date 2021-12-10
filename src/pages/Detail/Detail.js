@@ -11,6 +11,8 @@ const Detail = () => {
   const {movie} = route.params;
   const navigation = useNavigation();
 
+  const commentScrollRef = useRef();
+
   const [commentsData, setCommentsData] = useState(null);
   const [commentsVisible, setCommentsVisible] = useState(false);
   const [similarContentData, setSimilarContentData] = useState([]);
@@ -20,9 +22,11 @@ const Detail = () => {
     data: initialCommentData,
   } = useFetch(`comments?movieId=${movie.id}`);
 
-  const {data: filteredSimilarContent} = useFetch(
-    `movies?genre_like=${movie.genre.join('&genre_like=')}`,
-  );
+  const {
+    loading: similarDataLoading,
+    error: similarDataError,
+    data: filteredSimilarContent,
+  } = useFetch(`movies?genre_like=${movie.genre.join('&genre_like=')}`);
 
   useEffect(() => {
     if (initialCommentData != null) {
@@ -32,6 +36,12 @@ const Detail = () => {
       setSimilarContentData(filteredSimilarContent);
     }
   }, [initialCommentData, filteredSimilarContent]);
+
+  useEffect(() => {
+    if (commentScrollRef.current !== undefined) {
+      commentScrollRef.current.scrollToEnd();
+    }
+  }, [commentsData]);
 
   const onCloseComment = () => {
     setCommentsVisible(false);
@@ -54,11 +64,22 @@ const Detail = () => {
     navigation.push(routes.DETAIL_PAGE, {movie});
   };
 
-  if (loading) {
+  // Fisher–Yates shuffle algoritması
+  const handleShuffle = data => {
+    for (let i = data.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temporaryItem = data[i];
+      data[i] = data[j];
+      data[j] = temporaryItem;
+    }
+    return data;
+  };
+
+  if (loading || similarDataLoading) {
     return <Loading />;
   }
-  if (error) {
-    return <CenterText text="Oops!!!{'\n'}Something went wrong" />;
+  if (error || similarDataError) {
+    return <CenterText text={'Oops!!!\nSomething went wrong'} />;
   }
 
   return (
@@ -70,7 +91,8 @@ const Detail = () => {
       getTextFromInput={getTextFromInput}
       movie={movie}
       onShowComment={onShowComment}
-      similarContentData={similarContentData}
+      similarContentData={handleShuffle(similarContentData)}
+      commentScrollRef={commentScrollRef}
     />
   );
 };

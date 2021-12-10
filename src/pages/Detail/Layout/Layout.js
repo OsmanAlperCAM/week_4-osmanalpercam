@@ -18,6 +18,7 @@ const Layout = ({
   movie,
   onShowComment,
   similarContentData,
+  commentScrollRef,
 }) => {
   const renderComment = ({item, index}) => {
     return <CommentCard comment={item.comment} index={index} />;
@@ -33,7 +34,7 @@ const Layout = ({
     );
   };
   return (
-    <ScrollView>
+    <ScrollView keyboardShouldPersistTaps="handled">
       <View style={styles.container}>
         <Modal
           animationType="slide"
@@ -48,7 +49,11 @@ const Layout = ({
                 }
               />
             ) : (
-              <FlatList data={commentsData} renderItem={renderComment} />
+              <FlatList
+                ref={commentScrollRef}
+                data={commentsData}
+                renderItem={renderComment}
+              />
             )}
             <Input
               sendText={getTextFromInput}
