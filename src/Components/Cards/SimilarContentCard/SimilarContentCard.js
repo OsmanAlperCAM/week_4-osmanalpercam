@@ -4,11 +4,10 @@ import Badge from '../../Badge';
 import RateIcon from '../../RateIcon';
 import styles from './SimilarContentCard.style';
 
+const renderGenre = item => {
+  return <Badge key={Math.random()} genre={item} />;
+};
 const SimilarContentCard = ({movie, onPress}) => {
-  const renderGenre = item => {
-    return <Badge key={Math.random()} genre={item} />;
-  };
-
   const onPressCard = () => {
     onPress(movie);
   };

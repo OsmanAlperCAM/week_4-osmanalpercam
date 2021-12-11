@@ -9,6 +9,10 @@ import Input from '../../../Components/Input';
 import ModalHeader from '../../../Components/ModalHeader';
 import CenterText from '../../../Components/CenterText';
 
+const renderComment = ({item, index}) => {
+  return <CommentCard comment={item.comment} index={index} />;
+};
+
 const Layout = ({
   onSimilarContentCardPress,
   commentsVisible,
@@ -20,10 +24,6 @@ const Layout = ({
   similarContentData,
   commentScrollRef,
 }) => {
-  const renderComment = ({item, index}) => {
-    return <CommentCard comment={item.comment} index={index} />;
-  };
-
   const renderSimilarContentCard = item => {
     return (
       <SimilarContentCard
@@ -33,6 +33,7 @@ const Layout = ({
       />
     );
   };
+
   return (
     <ScrollView keyboardShouldPersistTaps="handled">
       <View style={styles.container}>

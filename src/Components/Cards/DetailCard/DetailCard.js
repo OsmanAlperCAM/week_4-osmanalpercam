@@ -5,8 +5,8 @@ import RateIcon from '../../RateIcon';
 import styles from './DetailCard.style';
 
 const DetailCard = ({id, name, rate, genre, director, brief, cast}) => {
-  const renderGenre = (item, index) => {
-    return <Badge key={`${item}+${id}+${index}`} genre={item} id={id} />;
+  const renderGenre = (item) => {
+    return <Badge key={Math.random()} genre={item}/>;
   };
   return (
     <View style={styles.container}>
