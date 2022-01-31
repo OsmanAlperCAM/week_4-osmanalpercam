@@ -1,4 +1,4 @@
-# week_4-osmanalpercam-suedacicekli
+# week_4-osmanalpercam
 
 ## Screenshot
 
